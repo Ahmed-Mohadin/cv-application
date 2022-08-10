@@ -1,36 +1,37 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import FormInput from './FormInput';
+import Buttons from './Buttons';
 
 class EducationalExp extends Component {
   render() {
     return (
       <>
+        <FormInput
+          htmlFor="school-name"
+          labelText="School Name"
+          inputType="text" />
 
-        <div className="school-name">
-          <label htmlFor="school-name">University or School Name</label>
-          <input type="text" name="school-name" id="school-name" placeholder='School Name'/>
-        </div>
-
-        <div className="city">
-          <label htmlFor="city">City</label>
-          <input type="text" name="city" id="city" placeholder='City'/>
-        </div>
-
-        <div className="from-date">
-          <label htmlFor="from-date">From</label>
-          <input type="date" name="from-date" id="from-date" />
-        </div>
+        <FormInput 
+          htmlFor="city"
+          labelText="City"
+          inputType="text" />                
 
         <div className="date">
-          <div className="to-date">
-            <label htmlFor="to-date">To</label>
-            <input type="date" name="to-date" id="to-date" />
-          </div>
-
-          <div className="degree">
-            <label htmlFor="degree">Degree</label>
-            <input type="text" name="degree" id="degree" placeholder='Degree'/>
-          </div>
+          <FormInput 
+            htmlFor="from-date"
+            labelText="From Date"
+            inputType="date" />                
+          
+          <FormInput 
+            htmlFor="to-date"
+            labelText="To Date"
+            inputType="date" />                
         </div>
+
+        <FormInput 
+          htmlFor="Degree"
+          labelText="Degree"
+          inputType="text" />
 
         <div className="education-desc">
           <label htmlFor="education-desc">Further Descriptions or Achievements</label>
@@ -39,11 +40,7 @@ class EducationalExp extends Component {
           </textarea>
         </div>
 
-        <div className="buttons">
-            <button className="btn cancel"><i className="fa-solid fa-xmark"></i> Cancel</button>
-            <button className='btn save'><i className="fa-solid fa-user-pen"></i> Save</button>
-        </div>
-
+        <Buttons />
     </>
     )
   }

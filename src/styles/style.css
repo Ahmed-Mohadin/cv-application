@@ -78,29 +78,24 @@ main{
 }
 
 /* .form-container */
-.form-container{
+.form-container,
+.preview-container{
     margin-top: 0.5rem;
     width: 40rem;
     box-shadow: var(--shadow);
     background-color: var(--bgColor2);
     padding: 2.5rem 1.8rem;
     border-radius: var(--defaultRadius);
-}
-.form-container h2{
-    margin: 0.5rem 0rem;
-}
-.form-container .general-info,
-.form-container .educational-exp,
-.form-container .practical-exp{
     color: var(--txtColor2);
 }
-.form-container .buttons,
-.form-container .buttons,
+.form-container h2,
+.preview-container h2{
+    margin: 0.5rem 0rem;
+}
 .form-container .buttons{
     margin-top: 0.5rem;
 }
-.form-container .cancel,
-.form-container .save{
+.form-container .btn{
     padding: 0.5rem 1.8rem;
 }
 .form-container .buttons .cancel{
@@ -139,16 +134,14 @@ main{
     align-items: center;
     justify-content: space-between;
 }
-.form-container .general-info{
+.form-container .general-info,
+.form-container .practical-exp,
+.form-container .educational-exp{
     padding-bottom: 1rem;
     border-bottom: solid 0.25rem var(--accentColor2);
 }
 
 /* .practical-exp */
-.form-container .practical-exp{
-    padding-bottom: 1rem;
-    border-bottom: solid 0.25rem var(--accentColor2);    
-}
 .form-container .practical-exp .date .from-date,
 .form-container .practical-exp .date .to-date{
     width: 48%;
@@ -158,27 +151,10 @@ main{
     justify-content: space-between;
 }
 
-/* .education-exp */
-
+/* .educational-exp */
 
 
 /* .preview-container */
-.preview-container{
-    margin-top: 0.5rem;
-    width: 40rem;
-    box-shadow: var(--shadow);
-    background-color: var(--bgColor2);
-    padding: 2.5rem 1.8rem;
-    border-radius: var(--defaultRadius);
-}
-.preview-container h2{
-    margin: 0.5rem 0rem;
-}
-.preview-container .general-info,
-.preview-container .educational-exp,
-.preview-container .practical-exp{
-    color: var(--txtColor2);
-}
 .preview-container .general-info .details{
     display: flex;
     align-items: center;
@@ -196,59 +172,41 @@ main{
     font-size: 0.8em;
     font-weight: lighter;
 }
-.preview-container .general-info{
-    padding-bottom: 1rem;
-    border-bottom: solid 0.25rem var(--accentColor2);
-}
 
-.preview-container .practical-exp{
-    padding-bottom: 1rem;
-    border-bottom: solid 0.25rem var(--accentColor2);
-}
-.preview-container .practical-exp .details{
-    display: grid;
-    grid-template: 1fr / 1fr 1fr 1fr;
-    padding-left: 0.5rem;
-    border-left: solid 0.25rem var(--accentColor2);
-    margin: 1rem 0rem;
-}
-.preview-container .practical-exp .details .left-side p{
-    font-size: 0.85em;
-    margin: 0.25rem 0rem;
-    color: #787575;
-    font-weight: lighter;
-}
-.preview-container .practical-exp .details .right-side p{
-    margin-top: 0.25rem;
-    font-size: 0.8em;
-}
-.preview-container .practical-exp .details .right-side{
-    grid-column: span 2;
-}
-
+.preview-container .general-info,
+.preview-container .practical-exp,
 .preview-container .educational-exp{
     padding-bottom: 1rem;
     border-bottom: solid 0.25rem var(--accentColor2);
 }
-.preview-container .educational-exp .details{
+.preview-container
+.details:not(.preview-container .general-info .details){
     display: grid;
     grid-template: 1fr / 1fr 1fr 1fr;
     padding-left: 0.5rem;
     border-left: solid 0.25rem var(--accentColor2);
     margin: 1rem 0rem;
 }
-.preview-container .educational-exp .details .left-side p{
+.preview-container .details .left-side p{
     font-size: 0.85em;
     margin: 0.25rem 0rem;
     color: #787575;
     font-weight: lighter;
 }
-.preview-container .educational-exp .details .right-side p{
+.preview-container .details .right-side p{
     margin-top: 0.25rem;
     font-size: 0.8em;
 }
-.preview-container .educational-exp .details .right-side{
+.preview-container .details .right-side{
     grid-column: span 2;
+}
+
+.underline{
+    width: 2.7rem;
+    height: 0.25rem;
+    border-radius: var(--defaultRadius);
+    background-color: var(--accentColor2);
+    margin-top: 0.25rem;
 }
 
 /* footer */
