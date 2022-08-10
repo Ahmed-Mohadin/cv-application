@@ -1,40 +1,24 @@
 import React, { Component } from 'react';
-import GeneralInfo from '../CVForm/GeneralInfo';
-import EducationalExp from '../CVForm/EducationalExp';
-import PracticalExp from '../CVForm/PracticalExp';
+import GeneralInfo from './GeneralInfo';
+import EducationalExp from './EducationalExp';
+import PracticalExp from './PracticalExp';
 
 class CVForm extends Component {
     
     render() {
         return (
             <form className='form-container' onSubmit={this.props.onSubmit}>
-                <h2>Create CV</h2>
                 <div className="general-info">
-                    <div className="form-header">
-                        <h3>General Information</h3>
-                        <button className="btn show-hide">
-                            <i className="fa-solid fa-angle-down"></i>
-                        </button>
-                    </div>
+                    <h2>Profile</h2>
                     <GeneralInfo />
                 </div>
-                <div className="educational-exp">
-                    <div className="form-header">
-                        <h3>Educational Experience</h3>
-                        <button className="btn show-hide">
-                            <i className="fa-solid fa-angle-down"></i>
-                        </button>
-                    </div>
-                    <EducationalExp />
-                </div>
                 <div className="practical-exp">
-                    <div className="form-header">
-                    <h3>Practical Experience</h3>
-                        <button className="btn show-hide">
-                            <i className="fa-solid fa-angle-down"></i>
-                        </button>
-                    </div>
+                    <h2>Experience</h2>
                     <PracticalExp />
+                </div>
+                <div className="educational-exp">
+                    <h2>Education</h2>
+                    <EducationalExp />
                 </div>
             </form>
         )
