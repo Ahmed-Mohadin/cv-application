@@ -1,0 +1,280 @@
+/* core */
+:root{
+    --bgColor1: #454545;
+    --bgColor2: #FDFFFF;   
+    --txtColor1: #EFEFEF;
+    --txtColor2: #333333;
+    --accentColor1: #2ABD67;
+    --accentColor2: #D1D1D1;
+    --onError: #FF4F3F;
+    --shadow: rgba(255, 255, 255, 0.24) 0.2rem 0.2rem 0.2rem;
+
+    --defaultRadius: 0.3rem;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-family: sans-serif, 'Times New Roman', Times, serif;
+    min-height: 100%;
+    position: relative;
+}
+body{
+    font-family: sans-serif;
+    background-color: var(--bgColor1); 
+    color: var(--txtColor1);
+    margin-bottom: 100px;
+}
+
+/* header */
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8rem;
+}
+header .title{
+    font-size: 3em;
+}
+
+/* main */
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btn{
+    outline: none;
+    border: none;
+    padding: 0.4rem 1.1rem;
+    background-color: var(--accentColor2);
+    border-radius: var(--defaultRadius);
+    font-weight: bold;
+}
+.btn:hover{
+    cursor: pointer;
+    box-shadow: var(--shadow);
+}
+.active{
+    background-color: var(--accentColor1);
+    color: var(--txtColor1);
+}
+
+/* .choose-mode */
+.choose-mode{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.choose-mode .mode{
+    padding: 0.5rem 1.8rem;
+}
+.choose-mode > span{
+    padding: 0.3rem;
+    font-size: 2em;
+}
+
+/* .form-container */
+.form-container{
+    margin-top: 0.5rem;
+    width: 40rem;
+    box-shadow: var(--shadow);
+    background-color: var(--bgColor2);
+    padding: 2.5rem 1.8rem;
+    border-radius: var(--defaultRadius);
+}
+.form-container h2{
+    margin: 0.5rem 0rem;
+}
+.form-container .general-info,
+.form-container .educational-exp,
+.form-container .practical-exp{
+    color: var(--txtColor2);
+}
+.form-container .buttons,
+.form-container .buttons,
+.form-container .buttons{
+    margin-top: 0.5rem;
+}
+.form-container .cancel,
+.form-container .save{
+    padding: 0.5rem 1.8rem;
+}
+.form-container .buttons .cancel{
+    margin-right: 0.5rem;
+}
+.form-container .buttons .cancel:hover{
+    background-color: var(--onError);
+    color: var(--txtColor1);
+}
+.form-container .buttons .save:hover{
+    background-color: var(--accentColor1);
+    color: var(--txtColor1);
+}
+.form-container label{
+    font-weight: bold;
+}
+.form-container textarea{
+    resize: vertical;
+    width: 100%;
+}
+.form-container input{
+    margin: 0.25rem 0rem;
+    border: none;
+    outline: none;
+    border-bottom: solid 0.2rem var(--accentColor2);
+    width: 100%;
+    font-size: 1em;
+}
+.form-container input:focus{
+    border-bottom-color: var(--bgColor1);
+}
+
+/* .general-info */
+.form-container .general-info .details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.form-container .general-info{
+    padding-bottom: 1rem;
+    border-bottom: solid 0.25rem var(--accentColor2);
+}
+
+/* .practical-exp */
+.form-container .practical-exp{
+    padding-bottom: 1rem;
+    border-bottom: solid 0.25rem var(--accentColor2);    
+}
+.form-container .practical-exp .date .from-date,
+.form-container .practical-exp .date .to-date{
+    width: 48%;
+}
+.form-container .practical-exp .date{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .education-exp */
+
+
+
+/* .preview-container */
+.preview-container{
+    margin-top: 0.5rem;
+    width: 40rem;
+    box-shadow: var(--shadow);
+    background-color: var(--bgColor2);
+    padding: 2.5rem 1.8rem;
+    border-radius: var(--defaultRadius);
+}
+.preview-container h2{
+    margin: 0.5rem 0rem;
+}
+.preview-container .general-info,
+.preview-container .educational-exp,
+.preview-container .practical-exp{
+    color: var(--txtColor2);
+}
+.preview-container .general-info .details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.preview-container .general-info .details h3{
+    font-size: 2.5em;
+}
+.preview-container .general-info .details h4{
+    color: #787575;
+    font-size: 0.9em;
+    font-weight: lighter;
+}
+.preview-container .general-info .details h5{
+    font-size: 0.8em;
+    font-weight: lighter;
+}
+.preview-container .general-info{
+    padding-bottom: 1rem;
+    border-bottom: solid 0.25rem var(--accentColor2);
+}
+
+.preview-container .practical-exp{
+    padding-bottom: 1rem;
+    border-bottom: solid 0.25rem var(--accentColor2);
+}
+.preview-container .practical-exp .details{
+    display: grid;
+    grid-template: 1fr / 1fr 1fr 1fr;
+    padding-left: 0.5rem;
+    border-left: solid 0.25rem var(--accentColor2);
+    margin: 1rem 0rem;
+}
+.preview-container .practical-exp .details .left-side p{
+    font-size: 0.85em;
+    margin: 0.25rem 0rem;
+    color: #787575;
+    font-weight: lighter;
+}
+.preview-container .practical-exp .details .right-side p{
+    margin-top: 0.25rem;
+    font-size: 0.8em;
+}
+.preview-container .practical-exp .details .right-side{
+    grid-column: span 2;
+}
+
+.preview-container .educational-exp{
+    padding-bottom: 1rem;
+    border-bottom: solid 0.25rem var(--accentColor2);
+}
+.preview-container .educational-exp .details{
+    display: grid;
+    grid-template: 1fr / 1fr 1fr 1fr;
+    padding-left: 0.5rem;
+    border-left: solid 0.25rem var(--accentColor2);
+    margin: 1rem 0rem;
+}
+.preview-container .educational-exp .details .left-side p{
+    font-size: 0.85em;
+    margin: 0.25rem 0rem;
+    color: #787575;
+    font-weight: lighter;
+}
+.preview-container .educational-exp .details .right-side p{
+    margin-top: 0.25rem;
+    font-size: 0.8em;
+}
+.preview-container .educational-exp .details .right-side{
+    grid-column: span 2;
+}
+
+/* footer */
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--accentColor1);
+}
+footer a{
+    text-decoration: none;
+    color: var(--txtColor1);
+    border: solid 0.3rem transparent;
+}
+footer a:hover{
+    color: var(--accentColor1);
+    border-bottom-color: var(--accentColor1);
+}
+
+
+/* media queries */
+/* @media(max-width: 769px){
+}
+@media(max-width: 426px){
+} */
