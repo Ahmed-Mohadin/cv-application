@@ -1,46 +1,62 @@
 import React, { Component } from 'react';
 import FormInput from './FormInput';
-import Buttons from './Buttons';
+// import Buttons from './Buttons';
 
 class EducationalExp extends Component {
   render() {
+    const { onChange, value } = this.props;
+
     return (
       <>
         <FormInput
-          htmlFor="school-name"
+          htmlFor="schoolName"
           labelText="School Name"
-          inputType="text" />
+          inputType="text" 
+          onChange={onChange}
+          value={value.schoolName}
+          />
 
         <FormInput 
           htmlFor="city"
           labelText="City"
-          inputType="text" />                
+          inputType="text" 
+          onChange={onChange}
+          value={value.city}
+          />                
 
         <div className="date">
           <FormInput 
-            htmlFor="from-date"
+            htmlFor="fromDate"
             labelText="From Date"
-            inputType="date" />                
+            inputType="date" 
+            onChange={onChange}
+            value={value.fromDate}  
+            />                
           
           <FormInput 
-            htmlFor="to-date"
+            htmlFor="toDate"
             labelText="To Date"
-            inputType="date" />                
+            inputType="date" 
+            onChange={onChange}
+            value={value.toDate}  
+            />                
         </div>
 
         <FormInput 
-          htmlFor="Degree"
+          htmlFor="degree"
           labelText="Degree"
-          inputType="text" />
+          inputType="text" 
+          onChange={onChange}
+          value={value.degree}
+          />
 
-        <div className="education-desc">
-          <label htmlFor="education-desc">Further Descriptions or Achievements</label>
-          <textarea name="education-desc" id="education-desc" 
+        <div className="eduDesc">
+          <label htmlFor="eduDesc">Further Descriptions or Achievements</label>
+          <textarea name="eduDesc" id="eduDesc" onChange={onChange} value={value.eduDesc} 
                   cols="30" rows="10" placeholder='Keep it short and simple'>
           </textarea>
         </div>
 
-        <Buttons />
     </>
     )
   }

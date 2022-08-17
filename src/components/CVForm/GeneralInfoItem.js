@@ -1,28 +1,37 @@
 import React, { Component } from 'react';
-import Buttons from './Buttons';
 import FormInput from './FormInput';
 
 class GeneralInfoItem extends Component {
     
     render() {
+        const { onChange, value } = this.props;
         return (
             <>
                 <div className="details">
                     <div className="left-side">
                         <FormInput 
-                            htmlFor="first-name"
+                            htmlFor="firstName"
                             labelText="First Name"
-                            inputType="text" />
+                            inputType="text" 
+                            onChange={onChange}
+                            value={value.firstName}
+                            />
 
                         <FormInput 
-                            htmlFor="last-name"
+                            htmlFor="lastName"
                             labelText="Last Name"
-                            inputType="text" />
+                            inputType="text" 
+                            onChange={onChange}
+                            value={value.lastName}
+                            />
 
                         <FormInput 
                             htmlFor="role"
                             labelText="Role"
-                            inputType="text" />
+                            inputType="text" 
+                            onChange={onChange}
+                            value={value.role}
+                            />
 
                     </div>
                     
@@ -30,22 +39,30 @@ class GeneralInfoItem extends Component {
                         <FormInput 
                             htmlFor="address"
                             labelText="Address"
-                            inputType="text" />
+                            inputType="text" 
+                            onChange={onChange}
+                            value={value.address}
+                            />
 
                         <FormInput 
                             htmlFor="phone"
                             labelText="Phone"
-                            inputType="text" />
+                            inputType="text" 
+                            onChange={onChange}
+                            value={value.phone}
+                            />
 
                         <FormInput 
                             htmlFor="email"
                             labelText="Email"
-                            inputType="text" />
+                            inputType="text" 
+                            onChange={onChange}
+                            value={value.email}
+                            />
                                                 
                     </div>
                 
                 </div>
-                <Buttons />
             </>
         )
     }

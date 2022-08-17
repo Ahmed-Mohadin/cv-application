@@ -93,21 +93,15 @@ main{
     margin: 0.5rem 0rem;
 }
 .form-container .buttons{
-    margin-top: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
 }
 .form-container .btn{
     padding: 0.5rem 1.8rem;
+    margin: 0rem 0.5rem;
 }
-.form-container .buttons .cancel{
-    margin-right: 0.5rem;
-}
-.form-container .buttons .cancel:hover{
-    background-color: var(--onError);
-    color: var(--txtColor1);
-}
-.form-container .buttons .save:hover{
-    background-color: var(--accentColor1);
-    color: var(--txtColor1);
+.form-container .buttons .btn > i{
+    margin-right: 0.25rem;
 }
 .form-container label{
     font-weight: bold;
@@ -115,6 +109,7 @@ main{
 .form-container textarea{
     resize: vertical;
     width: 100%;
+    margin-bottom: 0.5rem;
 }
 .form-container input{
     margin: 0.25rem 0rem;
@@ -142,17 +137,46 @@ main{
 }
 
 /* .practical-exp */
-.form-container .practical-exp .date .from-date,
-.form-container .practical-exp .date .to-date{
+.form-container .practical-exp .date .fromDate,
+.form-container .practical-exp .date .toDate{
     width: 48%;
 }
 .form-container .practical-exp .date{
     display: flex;
     justify-content: space-between;
 }
+.form-container .practical-exp .delete{
+    margin-bottom: 0.5rem;
+}
+.form-container .practical-exp .btn{
+    width: 97.5%;
+}
+.form-container .delete:hover,
+.form-container .reset:hover{
+    background-color: var(--onError);
+    color: var(--txtColor1);
+}
+.form-container .add:hover,
+.form-container .save:hover{
+    background-color: var(--accentColor1);
+    color: var(--txtColor1);
+}
 
 /* .educational-exp */
-
+.form-container .educational-exp .date .fromDate,
+.form-container .educational-exp .date .toDate{
+    width: 48%;
+}
+.form-container .educational-exp .date{
+    display: flex;
+    justify-content: space-between;
+}
+.form-container .educational-exp .delete{
+    margin-bottom: 0.5rem;
+}
+.form-container .educational-exp .btn{
+    width: 97.5%;
+}
 
 /* .preview-container */
 .preview-container .general-info .details{

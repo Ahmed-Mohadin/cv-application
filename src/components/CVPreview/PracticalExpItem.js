@@ -11,7 +11,7 @@ class PracticalExp extends Component {
             </div>
             <div className="right-side">
                 <h4>{this.props.role}</h4>
-                <p>{this.props.desc}</p>
+                <p>{this.props.workDesc}</p>
             </div>
         </div>
     )

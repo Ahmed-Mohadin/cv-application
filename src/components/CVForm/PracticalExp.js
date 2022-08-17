@@ -1,48 +1,66 @@
 import React, { Component } from 'react';
 import FormInput from './FormInput';
-import Buttons from './Buttons';
+// import Buttons from './Buttons';
 
 class PracticalExp extends Component {
+
   render() {
+    const { value, onChange } = this.props;
+
     return (
       <>
         <FormInput
-          htmlFor="company-name"
+          htmlFor="companyName"
           labelText="Comapny Name"
-          inputType="text" />
+          inputType="text" 
+          onChange={onChange}
+          value={value.companyName}
+          />
 
         <FormInput 
           htmlFor="role"
           labelText="Role"
-          inputType="text" />
+          inputType="text" 
+          onChange={onChange}
+          value={value.role}
+          />
 
         <FormInput 
           htmlFor="city"
           labelText="City"
-          inputType="text" />                
+          inputType="text" 
+          onChange={onChange}
+          value={value.city}
+          />                
 
         <div className="date">
           <FormInput 
-            htmlFor="from-date"
+            htmlFor="fromDate"
             labelText="From Date"
-            inputType="text" />                
+            inputType="date" 
+            onChange={onChange}
+            value={value.fromDate}
+            />                
           
           <FormInput 
-            htmlFor="to-date"
+            htmlFor="toDate"
             labelText="To Date"
-            inputType="date" />                
+            inputType="date" 
+            onChange={onChange}
+            value={value.toDate}
+            />   
+
         </div>
                     
-        <div className="work-desc">
-            <label htmlFor="work-desc">Further Descriptions or Achievements</label>
+        <div className="workDesc">
+            <label htmlFor="workDesc">Further Descriptions or Achievements</label>
             <br></br>
-            <textarea name="work-desc" id="work-desc"  
-                  cols="30" rows="10" placeholder='Keep it short and simple'>
+            <textarea name="workDesc" id="workDesc" onChange={onChange} value={value.workDesc}
+                      cols="30" rows="10" placeholder='Keep it short and simple'>
             </textarea>
         </div>
 
-        <Buttons />        
-    </>
+      </>
     )
   }
 }
