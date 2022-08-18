@@ -30,7 +30,7 @@ class CVForm extends Component {
             // toDate: '',
             // degree: '',
             // eduDesc: '',
-            inputListEducation: []
+            inputListEducation: [],
         }
     }
 
@@ -65,7 +65,9 @@ class CVForm extends Component {
             this.state.inputListExperience,
             this.state.inputListEducation
         );
-        console.log('Saved form');
+        this.setState({
+            canEdit: !this.state.canEdit
+        })
     }
 
     addExperience = () => {
@@ -79,8 +81,7 @@ class CVForm extends Component {
         };
         this.setState({
             inputListExperience: [...this.state.inputListExperience, newExperience]
-        })
-        console.log('Added experience')
+        })        
     }
 
     addEducation = () => {
@@ -95,7 +96,6 @@ class CVForm extends Component {
         this.setState({
             inputListEducation: [...this.state.inputListEducation, newEducation]
         })
-        console.log('Added education')        
     }
 
     onDeleteExperience = (index) => {
@@ -104,7 +104,6 @@ class CVForm extends Component {
         this.setState({
             inputListExperience: list
         })
-        console.log('Deleted experience');
     }
 
     onDeleteEducation = (index) => {
@@ -113,7 +112,6 @@ class CVForm extends Component {
         this.setState({
             inputListEducation: list
         })
-        console.log('Deleted education');
     }
 
     resetForm = () => {
@@ -151,13 +149,61 @@ class CVForm extends Component {
             generalInfo: gList,
             inputListExperience: pList,
             inputListEducation: eList,
-        }, () => console.log(this.props.cvInfo))
+        })
+    }
 
-        console.log('Reseted form')
+    gg = (i, infoIndex) => {
+        return this.props.setInfo(i)[infoIndex]
+    }
+
+    componentDidMount(){
+        this.addExperience(this.props.setInfo(1).length);
+        this.setForm();
+    }
+
+    setForm = () => {
+        const gList = this.state.generalInfo;
+        // const pList = this.state.inputListExperience;
+        // const eList = this.state.inputListEducation;
+
+        gList.firstName = this.props.setInfo(0).firstName;
+        gList.lastName = this.props.setInfo(0).lastName;
+        gList.role = this.props.setInfo(0).role;
+        gList.address = this.props.setInfo(0).address;
+        gList.phone = this.props.setInfo(0).phone;
+        gList.email = this.props.setInfo(0).email;
+
+        // this.props.setInfo(1).forEach((info, index) => {
+        //     this.addExperience();
+        //     pList.forEach((p, i) => {
+        //         if(i === index){
+        //             console.log('sa')
+        //         }
+        //         p.companyName = "";
+        //         p.role = "";
+        //         p.city = "";
+        //         p.fromDate = "";
+        //         p.toDate = "";
+        //         p.workDesc = "";                    
+        //     })    
+        // })
+        
+        // eList.forEach((e) => {
+        //     e.schoolName = this.props.setInfo(2).schoolName;
+        //     e.city = this.props.setInfo(2).city;
+        //     e.fromDate = this.props.setInfo(2).fromDate;
+        //     e.toDate = this.props.setInfo(2).toDate;
+        //     e.degree = this.props.setInfo(2).degree;
+        //     e.eduDesc = this.props.setInfo(2).eduDesc;                    
+        // })
+
+        this.setState({
+            generalInfo: gList,
+            // inputListEducation: eList,
+        })
     }
 
     render() {
-
         return (
             <form className='form-container' onSubmit={this.onSubmit}>
                 <div className="buttons">
@@ -165,12 +211,11 @@ class CVForm extends Component {
                             <i className="fa-solid fa-eraser"></i> 
                             Reset Form
                     </button>
-                    <button type='submit' className='btn save'>
+                    <button type='submit' className='btn'>
                             <i className="fa-solid fa-user-pen"></i> 
                             Save Form
                     </button>
                 </div>
-
                 <div className="general-info">
                     <h2>Profile <div className='underline'></div></h2>
                     <GeneralInfoItem onChange={(e) => this.onChangeGeneral(e, this.state.generalInfo)} 

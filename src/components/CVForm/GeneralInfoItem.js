@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FormInput from './FormInput';
+import FormInput from '../utils/FormInput';
 
 class GeneralInfoItem extends Component {
     

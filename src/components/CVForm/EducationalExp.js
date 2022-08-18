@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import FormInput from './FormInput';
-// import Buttons from './Buttons';
+import FormInput from '../utils/FormInput';
 
 class EducationalExp extends Component {
   render() {
@@ -28,15 +27,15 @@ class EducationalExp extends Component {
           <FormInput 
             htmlFor="fromDate"
             labelText="From Date"
-            inputType="date" 
+            inputType="text" 
             onChange={onChange}
             value={value.fromDate}  
             />                
           
           <FormInput 
             htmlFor="toDate"
-            labelText="To Date"
-            inputType="date" 
+            labelText="To Date or Present"
+            inputType="text" 
             onChange={onChange}
             value={value.toDate}  
             />                
