@@ -19,22 +19,13 @@ class CVApp extends Component {
                 },
                 [
                     {
-                        companyName: 'c 1',
-                        role: 'r 1',
-                        city: 'c 1',
-                        fromDate: 'f 1',
-                        toDate: 't 1',
-                        workDesc: 'w 1',                                
-                    },
-                    {
-                        companyName: 'c 2',
-                        role: 'r 2',
-                        city: 'c 2',
-                        fromDate: 'f 2',
-                        toDate: 't 2',
-                        workDesc: 'w 2',                                
-                    },
-
+                        companyName: '',
+                        role: '',
+                        city: '',
+                        fromDate: '',
+                        toDate: '',
+                        workDesc: '',                                
+                    }
                 ],
                 [
                     {
@@ -53,10 +44,14 @@ class CVApp extends Component {
     }
 
     onChangeMode = (e) => {
-        if(!e.target.classList.contains('active') && !e.target.classList.contains('example')){
+        if(!e.target.classList.contains('active') && e.target.classList.contains('create')){
             this.setState({
-                isModeCreate: !this.state.isModeCreate,
+                isModeCreate: true,
             })    
+        } else if(!e.target.classList.contains('active') && e.target.classList.contains('preview')){
+            this.setState({
+                isModeCreate: false,
+            })                
         }
         document.querySelector('.active').classList.remove('active');
         e.target.classList.add('active');
@@ -68,7 +63,7 @@ class CVApp extends Component {
     addCV = (generalInfo, practicalExp, educationalExp) => {
         this.setState({
             cvInfo: [...this.state.cvInfo, generalInfo, practicalExp, educationalExp]
-        }, () => console.log(this.state.cvInfo));
+        });
     }
 
     resetCV = () => {
@@ -98,11 +93,11 @@ class CVApp extends Component {
         return (
         <main>
             <div className="choose-mode">
-                <button className="btn mode active" onClick={this.onChangeMode}>Create mode</button>
+                <button className="btn mode create active" onClick={this.onChangeMode}>Create mode</button>
                 <span>/</span>
                 <button className='btn example' onClick={this.exampleForm}>Example Form</button>               
                 <span>/</span>
-                <button className="btn mode" onClick={this.onChangeMode}>Preview mode</button> 
+                <button className="btn mode preview" onClick={this.onChangeMode}>Preview mode</button> 
             </div>
             {
                 this.state.showExampleForm 

@@ -31,12 +31,13 @@ class CVForm extends Component {
             // degree: '',
             // eduDesc: '',
             inputListEducation: [],
+            needToSave: false
         }
     }
 
     onChangeGeneral = (e, fieldName) => {
         fieldName[e.target.name] = e.target.value
-        this.setState({ fieldName });
+        this.setState({ fieldName, needToSave: true, });
     };
 
     onChangeExperience = (e, index) => {
@@ -44,7 +45,8 @@ class CVForm extends Component {
         const list = [...this.state.inputListExperience];
         list[index][name] = value;
         this.setState({
-            inputListExperience: list
+            inputListExperience: list,
+            needToSave: true,
         })
     }
 
@@ -53,7 +55,8 @@ class CVForm extends Component {
         const list = [...this.state.inputListEducation];
         list[index][name] = value;
         this.setState({
-            inputListEducation: list
+            inputListEducation: list,
+            needToSave: true,
         })        
     }
 
@@ -66,7 +69,7 @@ class CVForm extends Component {
             this.state.inputListEducation
         );
         this.setState({
-            canEdit: !this.state.canEdit
+            needToSave: false
         })
     }
 
@@ -80,7 +83,8 @@ class CVForm extends Component {
             workDesc: '',                    
         };
         this.setState({
-            inputListExperience: [...this.state.inputListExperience, newExperience]
+            inputListExperience: [...this.state.inputListExperience, newExperience],
+            needToSave: false,
         })        
     }
 
@@ -94,7 +98,8 @@ class CVForm extends Component {
             eduDesc: '',
         }
         this.setState({
-            inputListEducation: [...this.state.inputListEducation, newEducation]
+            inputListEducation: [...this.state.inputListEducation, newEducation],
+            needToSave: false,
         })
     }
 
@@ -102,7 +107,8 @@ class CVForm extends Component {
         const list = [...this.state.inputListExperience];
         list.splice(index, 1);
         this.setState({
-            inputListExperience: list
+            inputListExperience: list,
+            needToSave: false,
         })
     }
 
@@ -110,7 +116,8 @@ class CVForm extends Component {
         const list = [...this.state.inputListEducation];
         list.splice(index, 1);
         this.setState({
-            inputListEducation: list
+            inputListEducation: list,
+            needToSave: false,
         })
     }
 
@@ -149,57 +156,15 @@ class CVForm extends Component {
             generalInfo: gList,
             inputListExperience: pList,
             inputListEducation: eList,
+            needToSave: false,
         })
     }
 
-    gg = (i, infoIndex) => {
-        return this.props.setInfo(i)[infoIndex]
-    }
-
     componentDidMount(){
-        this.addExperience(this.props.setInfo(1).length);
-        this.setForm();
-    }
-
-    setForm = () => {
-        const gList = this.state.generalInfo;
-        // const pList = this.state.inputListExperience;
-        // const eList = this.state.inputListEducation;
-
-        gList.firstName = this.props.setInfo(0).firstName;
-        gList.lastName = this.props.setInfo(0).lastName;
-        gList.role = this.props.setInfo(0).role;
-        gList.address = this.props.setInfo(0).address;
-        gList.phone = this.props.setInfo(0).phone;
-        gList.email = this.props.setInfo(0).email;
-
-        // this.props.setInfo(1).forEach((info, index) => {
-        //     this.addExperience();
-        //     pList.forEach((p, i) => {
-        //         if(i === index){
-        //             console.log('sa')
-        //         }
-        //         p.companyName = "";
-        //         p.role = "";
-        //         p.city = "";
-        //         p.fromDate = "";
-        //         p.toDate = "";
-        //         p.workDesc = "";                    
-        //     })    
-        // })
-        
-        // eList.forEach((e) => {
-        //     e.schoolName = this.props.setInfo(2).schoolName;
-        //     e.city = this.props.setInfo(2).city;
-        //     e.fromDate = this.props.setInfo(2).fromDate;
-        //     e.toDate = this.props.setInfo(2).toDate;
-        //     e.degree = this.props.setInfo(2).degree;
-        //     e.eduDesc = this.props.setInfo(2).eduDesc;                    
-        // })
-
         this.setState({
-            generalInfo: gList,
-            // inputListEducation: eList,
+            generalInfo: {...this.props.setInfo(0)},
+            inputListExperience: [...this.props.setInfo(1)],
+            inputListEducation: [...this.props.setInfo(2)]
         })
     }
 
@@ -207,13 +172,13 @@ class CVForm extends Component {
         return (
             <form className='form-container' onSubmit={this.onSubmit}>
                 <div className="buttons">
-                    <button type='button' className='btn save' onClick={() => this.resetForm()} >
+                    <button type='button' className='btn reset' onClick={() => this.resetForm()} >
                             <i className="fa-solid fa-eraser"></i> 
                             Reset Form
                     </button>
-                    <button type='submit' className='btn'>
+                    <button type='submit' className={`btn ${this.state.needToSave ? null : 'active'}`}>
                             <i className="fa-solid fa-user-pen"></i> 
-                            Save Form
+                            {this.state.needToSave ? 'Save Form' : 'Form Saved'}
                     </button>
                 </div>
                 <div className="general-info">
