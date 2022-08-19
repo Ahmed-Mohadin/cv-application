@@ -22,7 +22,6 @@ html{
     position: relative;
 }
 body{
-    font-family: sans-serif;
     background-color: var(--bgColor1); 
     color: var(--txtColor1);
     margin-bottom: 100px;
@@ -81,7 +80,7 @@ main{
 .form-container,
 .preview-container{
     margin-top: 0.5rem;
-    width: 40rem;
+    width: 38rem;
     box-shadow: var(--shadow);
     background-color: var(--bgColor2);
     padding: 2.5rem 1.8rem;
@@ -93,21 +92,14 @@ main{
     margin: 0.5rem 0rem;
 }
 .form-container .buttons{
-    margin-top: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
 }
 .form-container .btn{
-    padding: 0.5rem 1.8rem;
+    margin: 0rem 0.5rem;
 }
-.form-container .buttons .cancel{
-    margin-right: 0.5rem;
-}
-.form-container .buttons .cancel:hover{
-    background-color: var(--onError);
-    color: var(--txtColor1);
-}
-.form-container .buttons .save:hover{
-    background-color: var(--accentColor1);
-    color: var(--txtColor1);
+.form-container .buttons .btn > i{
+    margin-right: 0.25rem;
 }
 .form-container label{
     font-weight: bold;
@@ -115,6 +107,7 @@ main{
 .form-container textarea{
     resize: vertical;
     width: 100%;
+    margin-bottom: 0.5rem;
 }
 .form-container input{
     margin: 0.25rem 0rem;
@@ -142,17 +135,35 @@ main{
 }
 
 /* .practical-exp */
-.form-container .practical-exp .date .from-date,
-.form-container .practical-exp .date .to-date{
+.form-container .practical-exp .date .fromDate,
+.form-container .practical-exp .date .toDate,
+.form-container .educational-exp .date .fromDate,
+.form-container .educational-exp .date .toDate{
     width: 48%;
 }
-.form-container .practical-exp .date{
+.form-container .practical-exp .date,
+.form-container .educational-exp .date{
     display: flex;
     justify-content: space-between;
 }
-
-/* .educational-exp */
-
+.form-container .practical-exp .delete,
+.form-container .educational-exp .delete{
+    margin-bottom: 0.5rem;
+}
+.form-container .practical-exp .btn,
+.form-container .educational-exp .btn{
+    width: 97.5%;
+}
+.form-container .delete:hover,
+.form-container .reset:hover{
+    background-color: var(--onError);
+    color: var(--txtColor1);
+}
+.form-container .add:hover,
+.form-container .save:hover{
+    background-color: var(--accentColor1);
+    color: var(--txtColor1);
+}
 
 /* .preview-container */
 .preview-container .general-info .details{
@@ -165,11 +176,12 @@ main{
 }
 .preview-container .general-info .details h4{
     color: #787575;
-    font-size: 0.9em;
+    font-size: 1em;
     font-weight: lighter;
 }
 .preview-container .general-info .details h5{
     font-size: 0.8em;
+    margin: 0.35rem 0rem;
     font-weight: lighter;
 }
 
@@ -188,14 +200,14 @@ main{
     margin: 1rem 0rem;
 }
 .preview-container .details .left-side p{
-    font-size: 0.85em;
+    font-size: 0.9em;
     margin: 0.25rem 0rem;
     color: #787575;
     font-weight: lighter;
 }
 .preview-container .details .right-side p{
     margin-top: 0.25rem;
-    font-size: 0.8em;
+    font-size: 0.85em;
 }
 .preview-container .details .right-side{
     grid-column: span 2;
@@ -232,7 +244,24 @@ footer a:hover{
 
 
 /* media queries */
-/* @media(max-width: 769px){
+@media(max-width: 769px){
+    .form-container,
+    .preview-container{
+        width: 30rem;
+    }
+    .form-container input{
+        width: 85%;
+        font-size: 1em;
+    }    
+    .preview-container .details .left-side p{
+        font-size: 0.8em;
+    }    
 }
 @media(max-width: 426px){
-} */
+    :root{
+        font-size: 0.6em;
+    }
+    .btn{
+        font-size: 0.9em;
+    }
+}

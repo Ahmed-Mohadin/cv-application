@@ -6,78 +6,84 @@ import EducationalExpItem from './EducationalExpItem';
 
 class CVPreview extends Component {
 
-  constructor(props){
-    super(props);
-    this.text = `
-    Lorem ipsum dolor sit amet consectetur adipisicing 
-    elit. Ea beatae obcaecati totam in quis accusamus 
-    cupiditate modi consequatur molestiae harum ipsam quo, 
-    sint officia esse perspiciatis alias incidunt aut accusantium.
-    `;
-  }
-
-
   render() {
+
+    const { cvInfo } = this.props;
+
     return (
       <div className="preview-container">
 
-        <div className="general-info">
+          {
+            cvInfo.map((info, index) => {
+              if(index === 0){
+                return (
+                  <div key={index} className="general-info">
+                    <GeneralInfoItem
+                      firstName={info.firstName}
+                      lastName={info.lastName}
+                      role={info.role}
+                      address={info.address}
+                      phone={info.phone}
+                      email={info.email}
+                    />
+                </div>   
+                )        
+              }
+              return null
+            })
+          }
+              
+          {
+            cvInfo[1].length > 0 ?
+            <div className="practical-exp">
+              <h2>Experience <div className='underline'></div></h2>
+              {
+                cvInfo.map((info, index) => {
+                  if(index === 1){
+                    return info.map((newI, newInd) => {
+                      return (
+                        <PracticalExpItem 
+                        key={newInd}
+                        companyName={newI.companyName}
+                        city={newI.city}
+                        year={`${newI.fromDate} - ${newI.toDate}`}
+                        role={newI.role}
+                        workDesc={newI.workDesc} 
+                        />      
+                      )  
+                    })
+                  }
+                  return null
+                })
+              }
+            </div> : null
+          }
 
-          <GeneralInfoItem 
-            firstName={'John'}
-            lastName={'Doe'}
-            role={'Front End Developer'}
-            address={'Street 123, NY'}
-            phone={'123 45 67 890'}
-            email={'john.doe@example.com'}
-            />
-            
-        </div>
-
-        <div className="practical-exp">
-          <h2>Experience <div className='underline'></div></h2>
-          
-          <PracticalExpItem
-            companyName={'Company Name'}
-            city={'City Name'}
-            year={'YYYY-MM - YYYY-MM'}
-            role={'Company Role'}
-            desc={this.text} />
-
-          <PracticalExpItem
-            companyName={'Company Name'}
-            city={'City Name'}
-            year={'YYYY-MM - YYYY-MM'}
-            role={'Company Role'}
-            desc={this.text} />
-
-          <PracticalExpItem
-            companyName={'Company Name'}
-            city={'City Name'}
-            year={'YYYY-MM - YYYY-MM'}
-            role={'Company Role'}
-            desc={this.text} />
-
-        </div>
-        
-        <div className="educational-exp">
-          <h2>Education <div className='underline'></div></h2>
-
-          <EducationalExpItem 
-            schoolName={'School Name'}
-            city={'City Name'}
-            year={'YYYY-MM - YYYY-MM'}
-            degree={'School Degree'}
-            desc={this.text} />
-
-          <EducationalExpItem 
-            schoolName={'School Name'}
-            city={'City Name'}
-            year={'YYYY-MM - YYYY-MM'}
-            degree={'School Degree'}
-            desc={this.text} />
-            
-        </div>
+          {
+            cvInfo[2].length > 0 ?
+            <div className="educational-exp">
+              <h2>Education <div className='underline'></div></h2>
+              {
+                cvInfo.map((info, index) => {
+                  if(index === 2){
+                    return info.map((newI, newInd) => {
+                      return (
+                        <EducationalExpItem 
+                        key={newInd}
+                        schoolName={newI.schoolName}
+                        city={newI.city}
+                        year={`${newI.fromDate} - ${newI.toDate}`}
+                        degree={newI.degree}
+                        eduDesc={newI.eduDesc} 
+                        />        
+                      )  
+                    })
+                  }
+                  return null
+                })
+              }            
+            </div> : null
+          }
       </div>
     )
   }

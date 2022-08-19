@@ -1,69 +1,110 @@
 import React, { Component } from 'react';
 import CVForm from './CVForm/CVForm';
 import CVPreview from './CVPreview/CVPreview';
+import cvInfoExample from './utils/ExampleCV';
 
 class CVApp extends Component {
     constructor(props) {
         super(props);
-
+        
         this.state = {
-            cvForm: {
-                generalInfo: {
-                    photo: '',
-                    fullName: '',
-                    currentRole: '',
-                    email: '',
-                    phone: '',
+            cvInfo: [
+                {
+                    firstName: '',
+                    lastName: '',
+                    role: '',
                     address: '',
+                    phone: '',
+                    email: '',    
                 },
-                // educationalExp: {
-    
-                // },
-                // practicalExp: {
-                    
-                // },
-                cvInfo: [],
-            },
-            mode: 'create',
-        }
-
-    }
-
-    onChangeMode = (e) => {
-        document.querySelector('.active').classList.remove('active');
-        e.target.classList.add('active')
-        if(!e.target.classList.contains('create-mode')) {
-            this.setState({
-                mode: 'preview'
-            })
-        } else {
-            this.setState({
-                mode: 'create'
-            })
+                [
+                    {
+                        companyName: '',
+                        role: '',
+                        city: '',
+                        fromDate: '',
+                        toDate: '',
+                        workDesc: '',                                
+                    }
+                ],
+                [
+                    {
+                        schoolName: '',
+                        city: '',
+                        fromDate: '',
+                        toDate: '',
+                        degree: '',
+                        eduDesc: '',            
+                    }
+                ]
+            ],
+            isModeCreate: true,
+            showExampleForm: false,
         }        
     }
 
-    handleChange = (e) => {
-
+    onChangeMode = (e) => {
+        if(!e.target.classList.contains('active') && e.target.classList.contains('create')){
+            this.setState({
+                isModeCreate: true,
+            })    
+        } else if(!e.target.classList.contains('active') && e.target.classList.contains('preview')){
+            this.setState({
+                isModeCreate: false,
+            })                
+        }
+        document.querySelector('.active').classList.remove('active');
+        e.target.classList.add('active');
+        this.setState({
+            showExampleForm: false
+        })
     }
 
-    onSubmitForm = (e) => {
-        e.preventDefault();
-        console.log('Saved');
+    addCV = (generalInfo, practicalExp, educationalExp) => {
+        this.setState({
+            cvInfo: [...this.state.cvInfo, generalInfo, practicalExp, educationalExp]
+        });
+    }
+
+    resetCV = () => {
+        this.setState({
+            cvInfo: this.state.cvInfo.splice(0, this.state.cvInfo.length)
+        })
+    }
+
+    exampleForm = (e) => {
+        document.querySelector('.active').classList.remove('active');
+        e.target.classList.add('active');
+        this.setState({
+            showExampleForm: true
+        })
+    }
+
+    setInfo = (infoIndex) => {
+        const list = this.state.cvInfo;
+        if(infoIndex === 0) return list[infoIndex];
+        if(infoIndex === 1 || infoIndex === 2){
+            return list[infoIndex].map((info) => info);
+        }
+        return 
     }
 
     render() {
         return (
         <main>
             <div className="choose-mode">
-                <button className="btn mode create-mode active" onClick={this.onChangeMode}>Create mode</button>
+                <button className="btn mode create active" onClick={this.onChangeMode}>Create mode</button>
                 <span>/</span>
-                <button className="btn mode preview-mode" onClick={this.onChangeMode}>Preview mode</button>                
+                <button className='btn example' onClick={this.exampleForm}>Example Form</button>               
+                <span>/</span>
+                <button className="btn mode preview" onClick={this.onChangeMode}>Preview mode</button> 
             </div>
             {
-                this.state.mode === 'create' 
-                ? <CVForm onSubmit={this.onSubmitForm} /> 
-                : <CVPreview /> 
+                this.state.showExampleForm 
+                ? <CVPreview cvInfo={cvInfoExample} />
+                : this.state.isModeCreate  
+                ? <CVForm setInfo={this.setInfo} cvInfo={this.state.cvInfo} addCV={this.addCV} resetCV={this.resetCV} />  
+                : <CVPreview cvInfo={this.state.cvInfo} /> 
             }
         </main>
         )
