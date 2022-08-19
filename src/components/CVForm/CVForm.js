@@ -17,19 +17,7 @@ class CVForm extends Component {
                 phone: '',
                 email: '',
             },
-            // companyName: '',
-            // role: '',
-            // city: '',
-            // fromDate: '',
-            // toDate: '',
-            // workDesc: '',                    
             inputListExperience: [],
-            // schoolName: '',
-            // city: '',
-            // fromDate: '',
-            // toDate: '',
-            // degree: '',
-            // eduDesc: '',
             inputListEducation: [],
             needToSave: false
         }
@@ -37,7 +25,7 @@ class CVForm extends Component {
 
     onChangeGeneral = (e, fieldName) => {
         fieldName[e.target.name] = e.target.value
-        this.setState({ fieldName, needToSave: true, });
+        this.setState({ fieldName, needToSave: true });
     };
 
     onChangeExperience = (e, index) => {
@@ -84,7 +72,7 @@ class CVForm extends Component {
         };
         this.setState({
             inputListExperience: [...this.state.inputListExperience, newExperience],
-            needToSave: false,
+            needToSave: true,
         })        
     }
 
@@ -99,7 +87,7 @@ class CVForm extends Component {
         }
         this.setState({
             inputListEducation: [...this.state.inputListEducation, newEducation],
-            needToSave: false,
+            needToSave: true,
         })
     }
 
@@ -108,7 +96,7 @@ class CVForm extends Component {
         list.splice(index, 1);
         this.setState({
             inputListExperience: list,
-            needToSave: false,
+            needToSave: true,
         })
     }
 
@@ -117,46 +105,45 @@ class CVForm extends Component {
         list.splice(index, 1);
         this.setState({
             inputListEducation: list,
-            needToSave: false,
+            needToSave: true,
         })
     }
 
     resetForm = () => {
-        this.props.resetCV();
-        const gList = this.state.generalInfo;
-        const pList = this.state.inputListExperience;
-        const eList = this.state.inputListEducation;
+        const genList = this.state.generalInfo;
+        const praList = this.state.inputListExperience;
+        const eduList = this.state.inputListEducation;
 
-        gList.firstName = "";
-        gList.lastName = "";
-        gList.role = "";
-        gList.address = "";
-        gList.phone = "";
-        gList.email = "";
+        genList.firstName = "";
+        genList.lastName = "";
+        genList.role = "";
+        genList.address = "";
+        genList.phone = "";
+        genList.email = "";
 
-        pList.forEach((p) => {
-            p.companyName = "";
-            p.role = "";
-            p.city = "";
-            p.fromDate = "";
-            p.toDate = "";
-            p.workDesc = "";                    
+        praList.forEach((exp) => {
+            exp.companyName = "";
+            exp.role = "";
+            exp.city = "";
+            exp.fromDate = "";
+            exp.toDate = "";
+            exp.workDesc = "";                    
         })
 
-        eList.forEach((e) => {
-            e.schoolName = "";
-            e.city = "";
-            e.fromDate = "";
-            e.toDate = "";
-            e.degree = "";
-            e.eduDesc = "";                    
+        eduList.forEach((edu) => {
+            edu.schoolName = "";
+            edu.city = "";
+            edu.fromDate = "";
+            edu.toDate = "";
+            edu.degree = "";
+            edu.eduDesc = "";                    
         })
 
         this.setState({
-            generalInfo: gList,
-            inputListExperience: pList,
-            inputListEducation: eList,
-            needToSave: false,
+            generalInfo: genList,
+            inputListExperience: praList,
+            inputListEducation: eduList,
+            needToSave: true,
         })
     }
 
@@ -169,6 +156,11 @@ class CVForm extends Component {
     }
 
     render() {
+
+        const { generalInfo, needToSave,
+            inputListExperience, inputListEducation,
+        } = this.state;
+
         return (
             <form className='form-container' onSubmit={this.onSubmit}>
                 <div className="buttons">
@@ -176,21 +168,21 @@ class CVForm extends Component {
                             <i className="fa-solid fa-eraser"></i> 
                             Reset Form
                     </button>
-                    <button type='submit' className={`btn ${this.state.needToSave ? null : 'active'}`}>
+                    <button type='submit' className={`btn ${needToSave ? null : 'active'}`}>
                             <i className="fa-solid fa-user-pen"></i> 
-                            {this.state.needToSave ? 'Save Form' : 'Form Saved'}
+                            {needToSave ? 'Save Form' : 'Form Saved'}
                     </button>
                 </div>
                 <div className="general-info">
                     <h2>Profile <div className='underline'></div></h2>
-                    <GeneralInfoItem onChange={(e) => this.onChangeGeneral(e, this.state.generalInfo)} 
-                                     value={this.state.generalInfo}
+                    <GeneralInfoItem onChange={(e) => this.onChangeGeneral(e, generalInfo)} 
+                                     value={generalInfo}
                                      />
                 </div>
                 <div className="practical-exp">
                     <h2>Experience <div className='underline'></div></h2>
                     {
-                        this.state.inputListExperience.map((inputList, index) => {
+                        inputListExperience.map((inputList, index) => {
                             return <div key={index}>
                                     <PracticalExp key={index.toString()} onChange={(e) => this.onChangeExperience(e, index)} 
                                     value={inputList}
@@ -210,7 +202,7 @@ class CVForm extends Component {
                 <div className="educational-exp">
                     <h2>Education <div className='underline'></div></h2>
                     {
-                        this.state.inputListEducation.map((inputList, index) => {
+                        inputListEducation.map((inputList, index) => {
                             return <div key={index}>
                                     <EducationalExp key={index.toString()} onChange={(e) => this.onChangeEducation(e, index)} 
                                     value={inputList}

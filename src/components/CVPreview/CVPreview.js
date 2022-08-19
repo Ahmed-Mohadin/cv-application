@@ -32,53 +32,58 @@ class CVPreview extends Component {
               return null
             })
           }
-            
-
-        <div className="practical-exp">
-          <h2>Experience <div className='underline'></div></h2>
+              
           {
-            cvInfo.map((info, index) => {
-              if(index === 1){
-                return info.map((newI, newInd) => {
-                  return (
-                    <PracticalExpItem 
-                    key={newInd}
-                    companyName={newI.companyName}
-                    city={newI.city}
-                    year={`${newI.fromDate} - ${newI.toDate}`}
-                    role={newI.role}
-                    workDesc={newI.workDesc} 
-                    />      
-                  )  
+            cvInfo[1].length > 0 ?
+            <div className="practical-exp">
+              <h2>Experience <div className='underline'></div></h2>
+              {
+                cvInfo.map((info, index) => {
+                  if(index === 1){
+                    return info.map((newI, newInd) => {
+                      return (
+                        <PracticalExpItem 
+                        key={newInd}
+                        companyName={newI.companyName}
+                        city={newI.city}
+                        year={`${newI.fromDate} - ${newI.toDate}`}
+                        role={newI.role}
+                        workDesc={newI.workDesc} 
+                        />      
+                      )  
+                    })
+                  }
+                  return null
                 })
               }
-              return null
-            })
+            </div> : null
           }
-        </div>
-        
-        <div className="educational-exp">
-          <h2>Education <div className='underline'></div></h2>
+
           {
-            cvInfo.map((info, index) => {
-              if(index === 2){
-                return info.map((newI, newInd) => {
-                  return (
-                    <EducationalExpItem 
-                    key={newInd}
-                    schoolName={newI.schoolName}
-                    city={newI.city}
-                    year={`${newI.fromDate} - ${newI.toDate}`}
-                    degree={newI.degree}
-                    eduDesc={newI.eduDesc} 
-                    />        
-                  )  
+            cvInfo[2].length > 0 ?
+            <div className="educational-exp">
+              <h2>Education <div className='underline'></div></h2>
+              {
+                cvInfo.map((info, index) => {
+                  if(index === 2){
+                    return info.map((newI, newInd) => {
+                      return (
+                        <EducationalExpItem 
+                        key={newInd}
+                        schoolName={newI.schoolName}
+                        city={newI.city}
+                        year={`${newI.fromDate} - ${newI.toDate}`}
+                        degree={newI.degree}
+                        eduDesc={newI.eduDesc} 
+                        />        
+                      )  
+                    })
+                  }
+                  return null
                 })
-              }
-              return null
-            })
-          }            
-        </div>
+              }            
+            </div> : null
+          }
       </div>
     )
   }

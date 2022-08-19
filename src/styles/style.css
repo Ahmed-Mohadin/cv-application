@@ -96,7 +96,6 @@ main{
     justify-content: flex-end;
 }
 .form-container .btn{
-    padding: 0.5rem 1.8rem;
     margin: 0rem 0.5rem;
 }
 .form-container .buttons .btn > i{
@@ -250,6 +249,10 @@ footer a:hover{
     .preview-container{
         width: 30rem;
     }
+    .form-container input{
+        width: 85%;
+        font-size: 1em;
+    }    
     .preview-container .details .left-side p{
         font-size: 0.8em;
     }    
