@@ -127,6 +127,12 @@ main{
     align-items: center;
     justify-content: space-between;
 }
+.form-container .general-info .details .left-side{
+    margin-right: 0.5rem;
+}
+.form-container .general-info .details .right-side{
+    margin-left: 0.5rem;
+}
 .form-container .general-info,
 .form-container .practical-exp,
 .form-container .educational-exp{
@@ -250,7 +256,6 @@ footer a:hover{
         width: 30rem;
     }
     .form-container input{
-        width: 85%;
         font-size: 1em;
     }    
     .preview-container .details .left-side p{
