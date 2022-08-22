@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import FormInput from '../utils/FormInput';
 
-class EducationalExp extends Component {
-  render() {
-    const { onChange, value } = this.props;
-
-    return (
+function EducationalExp({ value, onChange }) {
+  return (
       <>
         <FormInput
           htmlFor="schoolName"
@@ -57,8 +54,7 @@ class EducationalExp extends Component {
         </div>
 
     </>
-    )
-  }
+  )
 }
 
 export default EducationalExp;

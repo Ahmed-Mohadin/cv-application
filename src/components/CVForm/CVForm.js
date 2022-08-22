@@ -1,67 +1,51 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import GeneralInfoItem from './GeneralInfoItem';
 import EducationalExp from './EducationalExp';
 import PracticalExp from './PracticalExp';
 
-class CVForm extends Component {
+function CVForm({ addCV, setInfo }) {
 
-    constructor(props){
-        super(props);
-        
-        this.state = {
-            generalInfo: {
-                firstName: '',
-                lastName: '',
-                role: '',
-                address: '',
-                phone: '',
-                email: '',
-            },
-            inputListExperience: [],
-            inputListEducation: [],
-            needToSave: false
-        }
+    const [generalInfo, setGeneralInfo] = useState({
+        firstName: '',
+        lastName: '',
+        role: '',
+        address: '',
+        phone: '',
+        email: '',
+    });
+    const [inputListExperience, setInputListExperience] = useState([]);
+    const [inputListEducation, setInputListEducation] = useState([]);
+    const [needToSave, setNeedToSave] = useState(false);
+
+    const onChangeGeneral = (e) => {
+        generalInfo[e.target.name] = e.target.value;
+        setGeneralInfo({...generalInfo});
+        setNeedToSave(true);
     }
 
-    onChangeGeneral = (e, fieldName) => {
-        fieldName[e.target.name] = e.target.value
-        this.setState({ fieldName, needToSave: true });
-    };
-
-    onChangeExperience = (e, index) => {
+    const onChangeExperience = (e, index) => {
         const {name, value} = e.target;
-        const list = [...this.state.inputListExperience];
+        const list = [...inputListExperience];
         list[index][name] = value;
-        this.setState({
-            inputListExperience: list,
-            needToSave: true,
-        })
+        setInputListExperience(list);
+        setNeedToSave(true);        
     }
 
-    onChangeEducation = (e, index) => {
+    const onChangeEducation = (e, index) => {
         const {name, value} = e.target;
-        const list = [...this.state.inputListEducation];
+        const list = [...inputListEducation];
         list[index][name] = value;
-        this.setState({
-            inputListEducation: list,
-            needToSave: true,
-        })        
+        setInputListEducation(list);
+        setNeedToSave(true);        
     }
 
-    onSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        this.props.resetCV();
-        this.props.addCV(
-            this.state.generalInfo, 
-            this.state.inputListExperience,
-            this.state.inputListEducation
-        );
-        this.setState({
-            needToSave: false
-        })
+        addCV(generalInfo, inputListExperience, inputListEducation);
+        setNeedToSave(false);        
     }
 
-    addExperience = () => {
+    const addExperience = () => {
         const newExperience = {
             companyName: '',
             role: '',
@@ -70,13 +54,11 @@ class CVForm extends Component {
             toDate: '',
             workDesc: '',                    
         };
-        this.setState({
-            inputListExperience: [...this.state.inputListExperience, newExperience],
-            needToSave: true,
-        })        
+        setInputListExperience([...inputListExperience, newExperience]);
+        setNeedToSave(true);
     }
 
-    addEducation = () => {
+    const addEducation = () => {
         const newEducation = {
             schoolName: '',
             city: '',
@@ -85,34 +67,28 @@ class CVForm extends Component {
             degree: '',
             eduDesc: '',
         }
-        this.setState({
-            inputListEducation: [...this.state.inputListEducation, newEducation],
-            needToSave: true,
-        })
+        setInputListEducation([...inputListEducation, newEducation]);
+        setNeedToSave(true);
     }
 
-    onDeleteExperience = (index) => {
-        const list = [...this.state.inputListExperience];
+    const onDeleteExperience = (index) => {
+        const list = [...inputListExperience];
         list.splice(index, 1);
-        this.setState({
-            inputListExperience: list,
-            needToSave: true,
-        })
+        setInputListExperience(list);
+        setNeedToSave(true);
     }
 
-    onDeleteEducation = (index) => {
-        const list = [...this.state.inputListEducation];
+    const onDeleteEducation = (index) => {
+        const list = [...inputListEducation];
         list.splice(index, 1);
-        this.setState({
-            inputListEducation: list,
-            needToSave: true,
-        })
+        setInputListEducation(list);
+        setNeedToSave(true);
     }
 
-    resetForm = () => {
-        const genList = this.state.generalInfo;
-        const praList = this.state.inputListExperience;
-        const eduList = this.state.inputListEducation;
+    const resetForm = () => {
+        const genList = generalInfo;
+        const praList = inputListExperience;
+        const eduList = inputListEducation;
 
         genList.firstName = "";
         genList.lastName = "";
@@ -128,7 +104,7 @@ class CVForm extends Component {
             exp.fromDate = "";
             exp.toDate = "";
             exp.workDesc = "";                    
-        })
+        });
 
         eduList.forEach((edu) => {
             edu.schoolName = "";
@@ -137,91 +113,80 @@ class CVForm extends Component {
             edu.toDate = "";
             edu.degree = "";
             edu.eduDesc = "";                    
-        })
-
-        this.setState({
-            generalInfo: genList,
-            inputListExperience: praList,
-            inputListEducation: eduList,
-            needToSave: true,
-        })
+        });
+        
+        setGeneralInfo({...genList});
+        setInputListExperience([...praList]);
+        setInputListEducation([...eduList]);
+        setNeedToSave(true);
     }
 
-    componentDidMount(){
-        this.setState({
-            generalInfo: {...this.props.setInfo(0)},
-            inputListExperience: [...this.props.setInfo(1)],
-            inputListEducation: [...this.props.setInfo(2)]
-        })
-    }
+    useEffect(() => {
+        setGeneralInfo({...setInfo(0)});
+        setInputListExperience([...setInfo(1)]);
+        setInputListEducation([...setInfo(2)]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-    render() {
+    return (
+        <form className='form-container' onSubmit={onSubmit}>
+            <div className="buttons">
+                <button type='button' className='btn reset' onClick={() => resetForm()} >
+                        <i className="fa-solid fa-eraser"></i> 
+                        Reset Form
+                </button>
+                <button type='submit' className={`btn ${needToSave ? null : 'active'}`}>
+                        <i className="fa-solid fa-user-pen"></i> 
+                        {needToSave ? 'Save Form' : 'Form Saved'}
+                </button>
+            </div>
+            <div className="general-info">
+                <h2>Profile <div className='underline'></div></h2>
+                <GeneralInfoItem onChange={(e) => onChangeGeneral(e)} 
+                                 value={generalInfo}
+                                 />
+            </div>
+            <div className="practical-exp">
+                <h2>Experience <div className='underline'></div></h2>
+                {
+                    inputListExperience.map((inputList, index) => {
+                        return <div key={index}>
+                                <PracticalExp key={index.toString()} onChange={(e) => onChangeExperience(e, index)} 
+                                value={inputList}
+                                />
+                                <button type='button' className='btn delete' 
+                                        onClick={() => onDeleteExperience(index)}>
+                                        Delete Experience
+                                </button>
+                            </div>
 
-        const { generalInfo, needToSave,
-            inputListExperience, inputListEducation,
-        } = this.state;
+                    })
+                }
+                <button type='button' className='btn add' onClick={() => addExperience()}>
+                        Add Experience
+                </button>
+            </div>
+            <div className="educational-exp">
+                <h2>Education <div className='underline'></div></h2>
+                {
+                    inputListEducation.map((inputList, index) => {
+                        return <div key={index}>
+                                <EducationalExp key={index.toString()} onChange={(e) => onChangeEducation(e, index)} 
+                                value={inputList}
+                                />
+                                <button type='button' className='btn delete' 
+                                        onClick={() => onDeleteEducation(index)}>
+                                        Delete Education
+                                </button>
+                            </div>
 
-        return (
-            <form className='form-container' onSubmit={this.onSubmit}>
-                <div className="buttons">
-                    <button type='button' className='btn reset' onClick={() => this.resetForm()} >
-                            <i className="fa-solid fa-eraser"></i> 
-                            Reset Form
-                    </button>
-                    <button type='submit' className={`btn ${needToSave ? null : 'active'}`}>
-                            <i className="fa-solid fa-user-pen"></i> 
-                            {needToSave ? 'Save Form' : 'Form Saved'}
-                    </button>
-                </div>
-                <div className="general-info">
-                    <h2>Profile <div className='underline'></div></h2>
-                    <GeneralInfoItem onChange={(e) => this.onChangeGeneral(e, generalInfo)} 
-                                     value={generalInfo}
-                                     />
-                </div>
-                <div className="practical-exp">
-                    <h2>Experience <div className='underline'></div></h2>
-                    {
-                        inputListExperience.map((inputList, index) => {
-                            return <div key={index}>
-                                    <PracticalExp key={index.toString()} onChange={(e) => this.onChangeExperience(e, index)} 
-                                    value={inputList}
-                                    />
-                                    <button type='button' className='btn delete' 
-                                            onClick={() => this.onDeleteExperience(index)}>
-                                            Delete Experience
-                                    </button>
-                                </div>
-
-                        })
-                    }
-                    <button type='button' className='btn add' onClick={() => this.addExperience()}>
-                            Add Experience
-                    </button>
-                </div>
-                <div className="educational-exp">
-                    <h2>Education <div className='underline'></div></h2>
-                    {
-                        inputListEducation.map((inputList, index) => {
-                            return <div key={index}>
-                                    <EducationalExp key={index.toString()} onChange={(e) => this.onChangeEducation(e, index)} 
-                                    value={inputList}
-                                    />
-                                    <button type='button' className='btn delete' 
-                                            onClick={() => this.onDeleteEducation(index)}>
-                                            Delete Education
-                                    </button>
-                                </div>
-
-                        })
-                    }
-                    <button type='button' className='btn add' onClick={() => this.addEducation()}>
-                            Add Education
-                    </button>
-                </div>
-            </form>
-        )
-    }
+                    })
+                }
+                <button type='button' className='btn add' onClick={() => addEducation()}>
+                        Add Education
+                </button>
+            </div>
+        </form>
+    )
 }
-
 export default CVForm;
