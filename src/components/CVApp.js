@@ -1,114 +1,89 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import CVForm from './CVForm/CVForm';
 import CVPreview from './CVPreview/CVPreview';
-import cvInfoExample from './utils/ExampleCV';
+import cvInfoExample from './utils/cvInfoExample';
 
-class CVApp extends Component {
-    constructor(props) {
-        super(props);
-        
-        this.state = {
-            cvInfo: [
-                {
-                    firstName: '',
-                    lastName: '',
-                    role: '',
-                    address: '',
-                    phone: '',
-                    email: '',    
-                },
-                [
-                    {
-                        companyName: '',
-                        role: '',
-                        city: '',
-                        fromDate: '',
-                        toDate: '',
-                        workDesc: '',                                
-                    }
-                ],
-                [
-                    {
-                        schoolName: '',
-                        city: '',
-                        fromDate: '',
-                        toDate: '',
-                        degree: '',
-                        eduDesc: '',            
-                    }
-                ]
-            ],
-            isModeCreate: true,
-            showExampleForm: false,
-        }        
-    }
+function CVApp() {
+    const [cvInfo, setCVInfo] = useState([
+        {
+            firstName: '',
+            lastName: '',
+            role: '',
+            address: '',
+            phone: '',
+            email: '',    
+        },
+        [
+            {
+                companyName: '',
+                role: '',
+                city: '',
+                fromDate: '',
+                toDate: '',
+                workDesc: '',                                
+            }
+        ],
+        [
+            {
+                schoolName: '',
+                city: '',
+                fromDate: '',
+                toDate: '',
+                degree: '',
+                eduDesc: '',            
+            }
+        ]
+    ]);
+    const [isModeCreate, setIsModeCreate] = useState(true);
+    const [showExampleForm, setShowExampleForm] = useState(false);
 
-    onChangeMode = (e) => {
+    const onChangeMode = (e) => {
         if(!e.target.classList.contains('active') && e.target.classList.contains('create')){
-            this.setState({
-                isModeCreate: true,
-            })    
+            setIsModeCreate(true)
         } else if(!e.target.classList.contains('active') && e.target.classList.contains('preview')){
-            this.setState({
-                isModeCreate: false,
-            })                
+            setIsModeCreate(false);
         }
         document.querySelector('.active').classList.remove('active');
         e.target.classList.add('active');
-        this.setState({
-            showExampleForm: false
-        })
+        setShowExampleForm(false);
     }
 
-    addCV = (generalInfo, practicalExp, educationalExp) => {
-        this.setState({
-            cvInfo: [...this.state.cvInfo, generalInfo, practicalExp, educationalExp]
-        });
+    const addCV = (generalInfo, practicalExp, educationalExp) => {
+        setCVInfo([generalInfo, practicalExp, educationalExp]);
     }
 
-    resetCV = () => {
-        this.setState({
-            cvInfo: this.state.cvInfo.splice(0, this.state.cvInfo.length)
-        })
-    }
-
-    exampleForm = (e) => {
+    const exampleForm = (e) => {
         document.querySelector('.active').classList.remove('active');
         e.target.classList.add('active');
-        this.setState({
-            showExampleForm: true
-        })
+        setShowExampleForm(true);
     }
 
-    setInfo = (infoIndex) => {
-        const list = this.state.cvInfo;
-        if(infoIndex === 0) return list[infoIndex];
+    const setInfo = (infoIndex) => {
+        if(infoIndex === 0) return cvInfo[infoIndex];
         if(infoIndex === 1 || infoIndex === 2){
-            return list[infoIndex].map((info) => info);
-        }
-        return 
+            return cvInfo[infoIndex].map((info) => info);
+        } return       
     }
 
-    render() {
-        return (
+    return (
         <main>
             <div className="choose-mode">
-                <button className="btn mode create active" onClick={this.onChangeMode}>Create mode</button>
+                <button className="btn mode create active" onClick={onChangeMode}>Create mode</button>
                 <span>/</span>
-                <button className='btn example' onClick={this.exampleForm}>Example Form</button>               
+                <button className='btn example' onClick={exampleForm}>Example Form</button>               
                 <span>/</span>
-                <button className="btn mode preview" onClick={this.onChangeMode}>Preview mode</button> 
+                <button className="btn mode preview" onClick={onChangeMode}>Preview mode</button> 
             </div>
             {
-                this.state.showExampleForm 
+                showExampleForm 
                 ? <CVPreview cvInfo={cvInfoExample} />
-                : this.state.isModeCreate  
-                ? <CVForm setInfo={this.setInfo} cvInfo={this.state.cvInfo} addCV={this.addCV} resetCV={this.resetCV} />  
-                : <CVPreview cvInfo={this.state.cvInfo} /> 
+                : isModeCreate  
+                ? <CVForm setInfo={setInfo} addCV={addCV} />  
+                : <CVPreview cvInfo={cvInfo} /> 
             }
         </main>
-        )
-    }
+    )
+
 }
 
 export default CVApp;
